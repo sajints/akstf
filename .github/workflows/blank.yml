@@ -29,10 +29,10 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Init
-        run: terraform -chdir="/" init
+        run: terraform -chdir="./" init
 
       - name: Terraform Plan
-        run: terraform -chdir="/" plan
+        run: terraform -chdir="./" plan
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
