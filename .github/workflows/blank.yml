@@ -29,7 +29,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Init
-        run: terraform -chdir="/"" init
+        run: terraform -chdir="/" init
 
       - name: Terraform Plan
         run: terraform -chdir="/" plan
