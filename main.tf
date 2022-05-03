@@ -1,6 +1,7 @@
 provider "azurerm" {
   features {}
 }
+provider "azuread" {}
 
 terraform {
     required_providers {
@@ -10,7 +11,7 @@ terraform {
     }
     azuread = {
       source  = "hashicorp/azuread"
-      version = ">= 1.0.0"
+      version = ">= 2.0.0"
     }
     random = {
       source  = "hashicorp/random"
