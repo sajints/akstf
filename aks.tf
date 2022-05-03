@@ -52,10 +52,10 @@ module "aks" {
     "Agent" : "defaultnodepoolagent"
   }
 
-  ingress_application_gateway {
-    enabled    = true
-    gateway_id = azurerm_application_gateway.agw.id
-  }
+  # ingress_application_gateway {
+  #   enabled    = true
+  #   gateway_id = azurerm_application_gateway.agw.id
+  # }
 
   enable_ingress_application_gateway = true
   ingress_application_gateway_name = "aks-agw"
