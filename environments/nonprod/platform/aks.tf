@@ -13,13 +13,9 @@ module "network" {
 }
 
 data "azuread_group" "aks_cluster_admins" {
-  name = "AKS-cluster-admins"
+  name = "aks_cluster_admins"
+  # object_id = "e6d277c0-4e7f-4eab-9745-3acf027afb47"
 }
-# data "azuread_group" "aks_cluster_admins" {
-#   object_id =  "e6d277c0-4e7f-4eab-9745-3acf027afb47"
-#   # owners           = [data.azuread_client_config.aks_cluster_admins.object_id]
-#   display_name = "AKS-cluster-admins"
-# }
 
 module "aks" {
   source                           = "Azure/aks/azurerm"
