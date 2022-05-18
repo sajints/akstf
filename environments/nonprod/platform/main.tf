@@ -6,7 +6,7 @@ provider "azuread" {}
 terraform {
     backend "azurerm" {
     resource_group_name  = "rgmyaks"
-    storage_account_name = "stcssprodtfstate"
+    storage_account_name = "stprodtfstate"
     container_name       = "nonprodtfstate"
     key                  = "security/terraform.tfstate"
   }
