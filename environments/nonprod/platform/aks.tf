@@ -13,10 +13,13 @@ module "network" {
 }
 
 data "azuread_group" "aks_cluster_admins" {
-  # object_id =  "e6d277c0-4e7f-4eab-9745-3acf027afb47"
-  owners           = [data.azuread_client_config.aks_cluster_admins.object_id]
-  display_name = "AKS-cluster-admins"
+  name = "AKS-cluster-admins"
 }
+# data "azuread_group" "aks_cluster_admins" {
+#   object_id =  "e6d277c0-4e7f-4eab-9745-3acf027afb47"
+#   # owners           = [data.azuread_client_config.aks_cluster_admins.object_id]
+#   display_name = "AKS-cluster-admins"
+# }
 
 module "aks" {
   source                           = "Azure/aks/azurerm"
@@ -31,7 +34,7 @@ module "aks" {
   os_disk_size_gb                  = 50
   sku_tier                         = "Paid" # defaults to Free
   enable_role_based_access_control = true
-  rbac_aad_admin_group_object_ids  = [data.azuread_group.aks_cluster_admins.object_id]
+  rbac_aad_admin_group_object_ids  = [data.azuread_group.aks_cluster_admins.id]
   rbac_aad_managed                 = true
   private_cluster_enabled          = true # default value
   enable_http_application_routing  = true
