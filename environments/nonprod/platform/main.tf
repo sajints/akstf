@@ -4,8 +4,7 @@ provider "azurerm" {
 provider "azuread" {}
 
 terraform {
-  backend = "azurerm"
-  config = {
+  backend "azurerm" {
     resource_group_name  = "rgmyaks"
     storage_account_name = "stnonprodtfstatesajin"
     container_name       = "nonprodtfstate"
