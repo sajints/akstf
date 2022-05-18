@@ -13,8 +13,7 @@ module "network" {
 }
 
 data "azuread_group" "aks_cluster_admins" {
-  name = "aks_cluster_admins"
-  # object_id = "e6d277c0-4e7f-4eab-9745-3acf027afb47"
+  name = "AKS-cluster-admins"
 }
 
 module "aks" {
