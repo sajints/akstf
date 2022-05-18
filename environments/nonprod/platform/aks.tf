@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "example" {
-  name     = "aks-resource-group"
+  name     = var.rgname
   location = "eastus"
 }
 
