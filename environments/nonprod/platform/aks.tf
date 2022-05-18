@@ -12,10 +12,20 @@ module "network" {
   depends_on          = [azurerm_resource_group.example]
 }
 
-data "azuread_group" "aks_cluster_admins" {
-  object_id =  "e6d277c0-4e7f-4eab-9745-3acf027afb47"
-  # display_name = "AKS-cluster-admins"
+data "azuread_client_config" "aks_cluster_admins" {}
+
+resource "azuread_user" "group_owner" {
+  user_principal_name = "sajints@outlook.com"
+  display_name        = "aks_cluster_admins"
+  mail_nickname       = "example-group-owner"
+  password            = "SecretP@sswd99!"
 }
+
+# data "azuread_group" "aks_cluster_admins" {
+#   # object_id =  "e6d277c0-4e7f-4eab-9745-3acf027afb47"
+#   owners           = [data.azuread_client_config.aks_cluster_admins.object_id]
+#   display_name = "AKS-cluster-admins"
+# }
 
 module "aks" {
   source                           = "Azure/aks/azurerm"
@@ -30,7 +40,7 @@ module "aks" {
   os_disk_size_gb                  = 50
   sku_tier                         = "Paid" # defaults to Free
   enable_role_based_access_control = true
-  rbac_aad_admin_group_object_ids  = [data.azuread_group.aks_cluster_admins.object_id]
+  # rbac_aad_admin_group_object_ids  = [data.azuread_group.aks_cluster_admins.object_id]
   rbac_aad_managed                 = true
   private_cluster_enabled          = true # default value
   enable_http_application_routing  = true
@@ -66,6 +76,21 @@ module "aks" {
   net_profile_dns_service_ip     = "10.0.0.10"
   net_profile_docker_bridge_cidr = "170.10.0.1/16"
   net_profile_service_cidr       = "10.0.0.0/16"
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  role_based_access_control {
+    enabled = true
+
+    azure_active_directory {
+      managed = true
+      admin_group_object_ids = [
+        "e6d277c0-4e7f-4eab-9745-3acf027afb47", # C-CT-prod-css-admin
+      ]
+    }
+  }
 
   depends_on = [module.network]
 }
