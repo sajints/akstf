@@ -29,7 +29,7 @@ module "aks" {
   os_disk_size_gb                  = 50
   sku_tier                         = "Paid" # defaults to Free
   enable_role_based_access_control = true
-  rbac_aad_admin_group_object_ids  = "2371623d-1cb4-4506-a7a0-46be7e3ad35c"  #[data.azuread_group.aks_cluster_admins.id]
+  rbac_aad_admin_group_object_ids  = ["2371623d-1cb4-4506-a7a0-46be7e3ad35c"]  #[data.azuread_group.aks_cluster_admins.id]
   rbac_aad_managed                 = true
   private_cluster_enabled          = true # default value
   enable_http_application_routing  = true
