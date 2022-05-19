@@ -11,7 +11,7 @@ variable "name" {
 variable "rgname" {
   description = "The name of this rg"
   type        = string
-  default     = "rgmyaks"
+  default     = "rgaks"
 }
 
 variable "containername" {
