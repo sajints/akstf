@@ -12,10 +12,10 @@ on:
       version:
         description: 'Test scenario tags'
         required: true 
-        type: boolean
+        type: string
       environment:
         description: 'Environment to run tests against'
-        type: environment
+        type: string
         required: false 
 
 env:
