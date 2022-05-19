@@ -59,7 +59,7 @@ module "aks" {
 
   enable_ingress_application_gateway = true
   ingress_application_gateway_name = "aks-agw"
-  ingress_application_gateway_subnet_cidr = "10.52.1.0/24"
+  ingress_application_gateway_subnet_cidr = "10.0.2.0/24"
 
   network_policy                 = "azure"
   net_profile_dns_service_ip     = "10.0.0.10"
