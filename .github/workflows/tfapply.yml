@@ -10,11 +10,11 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Test scenario tags'
+        description: 'Version'
         required: true 
         type: string
       environment:
-        description: 'Environment to run tests against'
+        description: 'Environment'
         type: string
         required: false 
 
