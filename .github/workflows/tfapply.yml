@@ -53,7 +53,7 @@ jobs:
         run: terraform -chdir=${{ env.working_directory }} init
 
       - name: Terraform Apply
-        run: terraform -chdir=${{ env.working_directory }} apply
+        run: terraform -chdir=${{ env.working_directory }} apply -auto-approve
       
       # Message to say this wf completed
       - name: Run a one-line script
