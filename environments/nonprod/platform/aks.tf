@@ -23,7 +23,7 @@ module "aks" {
   kubernetes_version               = var.kubernetes_version
   orchestrator_version             = var.kubernetes_version
   prefix                           = "prefix"
-  cluster_name                     = "clusterwithtf"
+  cluster_name                     = "clusteraks"
   network_plugin                   = "azure"
   vnet_subnet_id                   = module.network.vnet_subnets[0]
   os_disk_size_gb                  = 50
@@ -37,11 +37,11 @@ module "aks" {
   enable_auto_scaling              = true
   enable_host_encryption           = true
   agents_min_count                 = 1
-  agents_max_count                 = 2
+  agents_max_count                 = 1
   agents_count                     = null # Please set `agents_count` `null` while `enable_auto_scaling` is `true` to avoid possible `agents_count` changes.
   agents_max_pods                  = 100
-  agents_pool_name                 = "odepool"
-  agents_availability_zones        = ["1", "2"]
+  agents_pool_name                 = "nodepool"
+  # agents_availability_zones        = ["1", "2"]
   agents_type                      = "VirtualMachineScaleSets"
 
   agents_labels = {
