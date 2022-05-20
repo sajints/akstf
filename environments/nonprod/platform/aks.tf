@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 module "network" {
-  source              = "./modules/network"  # "Azure/network/azurerm" #
+  source              = "./modules/network"  # "Azure/network/azurerm" # 
   resource_group_name = azurerm_resource_group.example.name
   address_space       = "10.52.0.0/16"
   subnet_prefixes     = ["10.52.1.0/24"]
