@@ -46,14 +46,14 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
-      - name: Terraform Init
-        run: terraform -chdir=${{ env.working_directory }} init
-
       - name: Terraform getaks
         run: terraform -chdir=${{ env.aksmodule_directory }} get
 
       - name: Terraform getnw
-        run: terraform -chdir=${{ env.nwmodule_directory }} get
+        run: terraform -chdir=${{ env.nwmodule_directory }} get  
+
+      - name: Terraform Init
+        run: terraform -chdir=${{ env.working_directory }} init
 
       - name: Terraform Plan
         run: terraform -chdir=${{ env.working_directory }} plan -lock=false
