@@ -33,7 +33,7 @@ terraform {
 data "terraform_remote_state" "foundation" {
   backend = "azurerm"
   config = {
-    resource_group_name  = "rgmyaks"
+    resource_group_name  = "rgaksstorage"
     storage_account_name = "stnonprodtfstatesajin"
     container_name       = "nonprodtfstate"
     key                  = "foundation/terraform.tfstate"
