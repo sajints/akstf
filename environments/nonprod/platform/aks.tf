@@ -17,7 +17,7 @@ module "network" {
 # }
 
 module "aks" {
-  source                           = "Azure/aks/azurerm"
+  source                           =  "../../../modules/aks" #"Azure/aks/azurerm"
   version                          = "4.14.0"
   resource_group_name              = azurerm_resource_group.example.name
   kubernetes_version               = var.kubernetes_version
