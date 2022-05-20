@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       working_directory: "environments/nonprod/platform"
+      aksmodule_directory: "environments/nonprod/platform/modules/aks"
+      nwmodule_directory: "environments/nonprod/platform/modules/network"
     # Steps represent a sequence of tasks that will be executed as part of the job
     
     defaults:
@@ -47,8 +49,11 @@ jobs:
       - name: Terraform Init
         run: terraform -chdir=${{ env.working_directory }} init
 
-      - name: Terraform get
-        run: terraform -chdir=${{ env.working_directory }} get
+      - name: Terraform getaks
+        run: terraform -chdir=${{ env.aksmodule_directory }} get
+
+      - name: Terraform getnw
+        run: terraform -chdir=${{ env.nwmodule_directory }} get
 
       - name: Terraform Plan
         run: terraform -chdir=${{ env.working_directory }} plan -lock=false
