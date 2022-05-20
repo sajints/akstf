@@ -48,7 +48,8 @@ jobs:
         run: terraform -chdir=${{ env.working_directory }} init
 
       - name: Terraform Plan
-        run: terraform -chdir=${{ env.working_directory }} plan -lock=false
+        run: terraform get
+            terraform -chdir=${{ env.working_directory }} plan -lock=false
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
