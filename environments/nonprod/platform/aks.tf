@@ -36,6 +36,7 @@ module "aks" {
   enable_azure_policy              = true
   enable_auto_scaling              = true
   enable_host_encryption           = true
+  enable_log_analytics_workspace   = false
   agents_min_count                 = 1
   agents_max_count                 = 1
   agents_count                     = null # Please set `agents_count` `null` while `enable_auto_scaling` is `true` to avoid possible `agents_count` changes.
