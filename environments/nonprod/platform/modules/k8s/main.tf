@@ -1,12 +1,12 @@
-provider "kubernetes" {
-#   config_path    = "~/.kube/config"
-#   config_context = "my-context"
-    load_config_file = "false"
-    host = var.host
-    client_certificate = var.client_certificate
-    client_key = var.client_key
-    cluster_ca_certificate = var.cluster_ca_certificate
-}
+# provider "kubernetes" {
+# #   config_path    = "~/.kube/config"
+# #   config_context = "my-context"
+#     load_config_file = "false"
+#     host = var.host
+#     client_certificate = var.client_certificate
+#     client_key = var.client_key
+#     cluster_ca_certificate = var.cluster_ca_certificate
+# }
 
 # resource "kubernetes_namespace" "example" {
 #   metadata {
@@ -23,38 +23,39 @@ resource "kubernetes_deployment" "example" {
       }
     }
     spec {
-      replicas = 3
+      replicas = 1
       selector{
           match_labels = {
               test = "MyExampleApp"
           }
+    }
+    
+    template {
+      metadata {
+        labels = {
+          test = "MyExampleApp"
+        }
       }
-      template{
-          metadata{
-              labels = {
-                  test = "MyExampleApp"
-              }
-          }
-          spec{
-              container{
-                  image = "nginx"
-                  name = "name"
 
-                  resources {
-                      limits{
-                          cpu = "0.5"
-                          memory = "512Mi"
-                      }
-                      requests{
-                          cpu = "250m"
-                          memory = "50Mi"
-                      }
-                  }
-              }
+      spec {
+        container {
+          image = "nginx:1.21.6"
+          name  = "example"
+
+          resources {
+            limits = {
+              cpu    = "0.5"
+              memory = "512Mi"
+            }
+            requests = {
+              cpu    = "250m"
+              memory = "50Mi"
+            }
           }
       }
     }
-  
+    }
+}
 }
 
 resource "kubernetes_service" "svc" {
@@ -73,3 +74,4 @@ resource "kubernetes_service" "svc" {
     }
   
 }
+

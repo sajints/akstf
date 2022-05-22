@@ -71,12 +71,18 @@ module "aks" {
   # depends_on = [azurerm_virtual_network.vnet]
 }
 
+# data "azurerm_kubernetes_cluster" "dataaks" {
+#   resource_group_name = azurerm_resource_group.example.name
+#   name = "clusteraks" 
+#   # host = data.azurerm_kubernetes_cluster.main.outputs.host
+# }
+
 module "k8s" {
   source = "./modules/k8s/"
-  host = "${module.cluster.host}"
-  client_certificate = "${base64decode(module.cluster.client_certificate)}"
-  client_key = "${base64decode(module.cluster.client_key)}"
-  cluster_ca_certificate = "${base64decode(module.cluster.cluster_ca_certificate)}"
+  host = module.aks.host
+  client_certificate = "${base64decode(module.aks.client_certificate)}"
+  client_key = "${base64decode(module.aks.client_key)}"
+  cluster_ca_certificate = "${base64decode(module.aks.cluster_ca_certificate)}"
   
   # depends_on          = [azurerm_kubernetes_cluster.main]
 }
