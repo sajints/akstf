@@ -33,12 +33,13 @@ module "aks" {
   rbac_aad_managed                 = true
   private_cluster_enabled          = true # default value
   enable_http_application_routing  = true
-  enable_azure_policy              = true
+  enable_azure_policy              = false
   enable_auto_scaling              = true
   enable_host_encryption           = true
   enable_log_analytics_workspace   = false
   agents_min_count                 = 1
   agents_max_count                 = 1
+  enable_kube_dashboard            = true 
   agents_count                     = null # Please set `agents_count` `null` while `enable_auto_scaling` is `true` to avoid possible `agents_count` changes.
   agents_max_pods                  = 100
   agents_pool_name                 = "nodepool"
@@ -68,4 +69,13 @@ module "aks" {
   net_profile_service_cidr       = "10.0.0.0/16"
 
   depends_on = [module.network]
+}
+
+module "k8s" {
+  source = "./modules/k8s/"
+  host = "${module.cluster.host}"
+  client_certificate = "${base64decode(module.cluster.client_certificate)}"
+  client_key = "${base64decode(module.cluster.client_key)}"
+  cluster_ca_certificate = "${base64decode(module.cluster.cluster_ca_certificate)}"
+  
 }
