@@ -15,7 +15,7 @@ provider "kubernetes" {
 # }
 
 resource "kubernetes_deployment" "example" {
-    depends_on          = [azurerm_resource_group.example]
+
     metadata {
       name = "terraform-example"
       labels = {
