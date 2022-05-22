@@ -78,5 +78,5 @@ module "k8s" {
   client_key = "${base64decode(module.cluster.client_key)}"
   cluster_ca_certificate = "${base64decode(module.cluster.cluster_ca_certificate)}"
   
-  depends_on          = [azurerm_kubernetes_cluster.main]
+  # depends_on          = [azurerm_kubernetes_cluster.main]
 }
