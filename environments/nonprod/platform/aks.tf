@@ -68,7 +68,7 @@ module "aks" {
   net_profile_docker_bridge_cidr = "170.10.0.1/16"
   net_profile_service_cidr       = "10.0.0.0/16"
 
-  # depends_on = [azurerm_virtual_network.vnet]
+   depends_on = [module.network]  # azurerm_virtual_network.vnet]
 }
 
 # data "azurerm_kubernetes_cluster" "dataaks" {
