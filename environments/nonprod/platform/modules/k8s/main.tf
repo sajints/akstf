@@ -14,7 +14,6 @@ data "azurerm_kubernetes_cluster" "cluster" {
 }
 
 
-
 # resource "kubernetes_namespace" "example" {
 #   metadata {
 #     name = "test"
