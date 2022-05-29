@@ -83,6 +83,7 @@ module "k8s" {
   client_certificate = "${base64decode(module.aks.client_certificate)}"
   client_key = "${base64decode(module.aks.client_key)}"
   cluster_ca_certificate = "${base64decode(module.aks.cluster_ca_certificate)}"
-  
-  # depends_on          = [azurerm_kubernetes_cluster.main]
+  kubernetes_cluster_name = "clusteraks"
+  rgname = azurerm_resource_group.example.name
+  depends_on          = [module.aks]
 }

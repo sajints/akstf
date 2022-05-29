@@ -10,6 +10,7 @@ module "ssh-key" {
 resource "azurerm_kubernetes_cluster" "main" {
   name                    = var.cluster_name == null ? "${var.prefix}-aks" : var.cluster_name
   kubernetes_version      = var.kubernetes_version
+  # depends_on              = [module.aks-cluster]
   location                = data.azurerm_resource_group.main.location
   resource_group_name     = data.azurerm_resource_group.main.name
   dns_prefix              = var.prefix
