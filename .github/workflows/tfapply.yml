@@ -91,9 +91,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Run
-        run: bash scripts/azlogin.sh
-        
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Terraform Init for k8s
         run: terraform -chdir=${{ env.k8smodule_directory }} init
 
