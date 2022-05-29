@@ -59,11 +59,19 @@ jobs:
       - name: Terraform get k8s
         run: terraform -chdir=${{ env.k8smodule_directory }} get   
 
-      - name: Terraform Init  -upgrade
+      - name: Terraform Init
         run: terraform -chdir=${{ env.working_directory }} init
 
       - name: Terraform Plan
         run: terraform -chdir=${{ env.working_directory }} plan -lock=false
+
+
+      - name: Terraform Init for k8s
+        run: terraform -chdir=${{ env.k8smodule_directory }} init
+
+      - name: Terraform Plan for k8s
+        run: terraform -chdir=${{ env.k8smodule_directory }} plan -lock=false  
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!

@@ -54,7 +54,7 @@ jobs:
         with:
           terraform_version: "1.1.9"
 
-      - name: Terraform Init -upgrade
+      - name: Terraform Init
         run: terraform -chdir=${{ env.working_directory }} init
 
       - name: Terraform Apply
@@ -66,6 +66,12 @@ jobs:
           name: code-coverage-report
           path: "./private_ssh_key"
       
+      - name: Terraform Init for k8s
+        run: terraform -chdir=${{ env.k8smodule_directory }} init
+
+      - name: Terraform Apply for k8s
+        run: terraform -chdir=${{ env.k8smodule_directory }} apply -auto-approve 
+
       # Message to say this wf completed
       - name: Run a one-line script
         run: echo Completed the flow successfully
