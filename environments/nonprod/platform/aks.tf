@@ -77,13 +77,13 @@ module "aks" {
 #   # host = data.azurerm_kubernetes_cluster.main.outputs.host
 # }
 
-module "k8s" {
-  source = "./modules/k8s/"
-  host = module.aks.host
-  client_certificate = "${base64decode(module.aks.client_certificate)}"
-  client_key = "${base64decode(module.aks.client_key)}"
-  cluster_ca_certificate = "${base64decode(module.aks.cluster_ca_certificate)}"
-  kubernetes_cluster_name = "clusteraks"
-  rgname = azurerm_resource_group.example.name
-  depends_on          = [module.aks]
-}
+# module "k8s" {
+#   source = "./modules/k8s/"
+#   host = module.aks.host
+#   client_certificate = "${base64decode(module.aks.client_certificate)}"
+#   client_key = "${base64decode(module.aks.client_key)}"
+#   cluster_ca_certificate = "${base64decode(module.aks.cluster_ca_certificate)}"
+#   kubernetes_cluster_name = "clusteraks"
+#   rgname = azurerm_resource_group.example.name
+#   depends_on          = [module.aks]
+# }
