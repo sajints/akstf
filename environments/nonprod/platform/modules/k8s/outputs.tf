@@ -17,3 +17,7 @@
 # output "host" {
 #     value = azurerm_kubernetes_cluster.main.kube_config_raw.0.host
 # }
+
+# output "kubernetes_cluster_name" {
+#     value = terraform_remote_state.aks.outputs.kubernetes_cluster_name
+# }

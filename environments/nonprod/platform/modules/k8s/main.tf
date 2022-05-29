@@ -2,20 +2,22 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.0.2"
+      version = "=2.92.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = ">= 2.0.1"
+      version = ">= 2.0"
     }
   }
 }
 
 data "terraform_remote_state" "aks" {
-  backend = "local"
-
+  backend = "azurerm"
   config = {
-    path = "foundation/terraform.tfstate"
+    resource_group_name  = "rgaksstorage"
+    storage_account_name = "storagetfstatesajin"
+    container_name       = "nonprodtfstate"
+    key                  = "foundation/terraform.tfstate"
   }
 }
 
@@ -25,8 +27,8 @@ provider "azurerm" {
 }
 
 data "azurerm_kubernetes_cluster" "cluster" {
-  name                = data.terraform_remote_state.aks.outputs.kubernetes_cluster_name
-  resource_group_name = data.terraform_remote_state.aks.outputs.resource_group_name
+  name                = "clusteraks" # var.kubernetes_cluster_name # data.terraform_remote_state.aks.outputs
+  resource_group_name = var.rgname # data.terraform_remote_state.aks.outputs
 }
 
 provider "kubernetes" {

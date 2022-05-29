@@ -22,3 +22,15 @@ variable "cluster_ca_certificate" {
     type        = string
     default     = null  
 } 
+
+variable "kubernetes_cluster_name" {
+    description = "kubernetes_cluster_name"
+    type        = string
+    default     = null  
+} 
+
+variable "rgname" {
+  description = "The name of this rg"
+  type        = string
+  default     = "rgaks"
+}
