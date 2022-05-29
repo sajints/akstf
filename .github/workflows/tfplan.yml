@@ -76,6 +76,7 @@ jobs:
           echo test, and deploy your project.
 
   k8s:
+    needs: terraform-plan
     runs-on: ubuntu-latest
     env:
       working_directory: "environments/nonprod/platform"
