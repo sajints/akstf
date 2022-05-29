@@ -59,7 +59,7 @@ jobs:
       - name: Terraform get k8s
         run: terraform -chdir=${{ env.k8smodule_directory }} get   
 
-      - name: Terraform Init
+      - name: Terraform Init  -upgrade
         run: terraform -chdir=${{ env.working_directory }} init
 
       - name: Terraform Plan
