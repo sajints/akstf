@@ -67,14 +67,28 @@ jobs:
           name: code-coverage-report
           path: "./private_ssh_key"
       
+      # Message to say this wf completed
+      - name: Run a one-line script
+        run: echo Completed the flow successfully
+
+  k8s:
+    runs-on: ubuntu-latest
+    env:
+      working_directory: "environments/nonprod/platform"
+      aksmodule_directory: "environments/nonprod/platform/modules/aks"
+      nwmodule_directory: "environments/nonprod/platform/modules/network"
+      k8smodule_directory: "environments/nonprod/platform/modules/k8s"
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
       - name: Terraform Init for k8s
         run: terraform -chdir=${{ env.k8smodule_directory }} init
 
       - name: Terraform Apply for k8s
         run: terraform -chdir=${{ env.k8smodule_directory }} apply -auto-approve 
-
-      # Message to say this wf completed
-      - name: Run a one-line script
-        run: echo Completed the flow successfully
-
 
