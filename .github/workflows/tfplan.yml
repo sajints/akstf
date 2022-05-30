@@ -75,32 +75,32 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-  k8s:
-    needs: terraform-plan
-    runs-on: ubuntu-latest
-    env:
-      working_directory: "environments/nonprod/platform"
-      aksmodule_directory: "environments/nonprod/platform/modules/aks"
-      nwmodule_directory: "environments/nonprod/platform/modules/network"
-      k8smodule_directory: "environments/nonprod/platform/modules/k8s"
+  # k8s:
+  #   needs: terraform-plan
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     working_directory: "environments/nonprod/platform"
+  #     aksmodule_directory: "environments/nonprod/platform/modules/aks"
+  #     nwmodule_directory: "environments/nonprod/platform/modules/network"
+  #     k8smodule_directory: "environments/nonprod/platform/modules/k8s"
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  #   # Steps represent a sequence of tasks that will be executed as part of the job
     
-    defaults:
-      run:
-        shell: bash
+  #   defaults:
+  #     run:
+  #       shell: bash
     
-    steps:
+  #   steps:
 
-      - name: Checkout
-        uses: actions/checkout@v3
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Run
-        run: bash scripts/azlogin.sh
+  #     - name: Run
+  #       run: bash scripts/azlogin.sh
         
-      - name: Terraform Init for k8s
-        run: terraform -chdir=${{ env.k8smodule_directory }} init
+  #     - name: Terraform Init for k8s
+  #       run: terraform -chdir=${{ env.k8smodule_directory }} init
 
-      - name: Terraform Plan for k8s
-        run: terraform -chdir=${{ env.k8smodule_directory }} plan -lock=false 
+  #     - name: Terraform Plan for k8s
+  #       run: terraform -chdir=${{ env.k8smodule_directory }} plan -lock=false 
 
