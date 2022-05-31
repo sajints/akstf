@@ -94,10 +94,10 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          client-id : ${{ secrets.ARM_CLIENT_ID }}
+          # ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          tenant-id : ${{ secrets.ARM_TENANT_ID }}
+          subscription-id': ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
       - name: Terraform Init for k8s
         run: terraform -chdir=${{ env.k8smodule_directory }} init
