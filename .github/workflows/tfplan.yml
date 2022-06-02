@@ -30,6 +30,7 @@ jobs:
       aksmodule_directory: "environments/nonprod/platform/modules/aks"
       nwmodule_directory: "environments/nonprod/platform/modules/network"
       k8smodule_directory: "environments/nonprod/platform/modules/k8s"
+      platform_directory: "environments/nonprod/platform/modules/Platform"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     
@@ -63,7 +64,13 @@ jobs:
         run: terraform -chdir=${{ env.working_directory }} init
 
       - name: Terraform Plan
-        run: terraform -chdir=${{ env.working_directory }} plan -lock=false
+        run: terraform -chdir=${{ env. }} plan -lock=false
+
+      - name: Terraform Init
+        run: terraform -chdir=${{ env.platform_directory }} init
+
+      - name: Terraform Plan
+        run: terraform -chdir=${{ env.platform_directory }} plan -lock=false
 
       # Runs a single command using the runners shell
       - name: Run a one-line script

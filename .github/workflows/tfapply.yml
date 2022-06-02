@@ -35,6 +35,7 @@ jobs:
       aksmodule_directory: "environments/nonprod/platform/modules/aks"
       nwmodule_directory: "environments/nonprod/platform/modules/network"
       k8smodule_directory: "environments/nonprod/platform/modules/k8s"
+      platform_directory: "environments/nonprod/platform/modules/Platform"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     
@@ -67,6 +68,12 @@ jobs:
           name: code-coverage-report
           path: "./private_ssh_key"
       
+      - name: Terraform Init
+        run: terraform -chdir=${{ env.platform_directory }} init
+
+      - name: Terraform Apply
+        run: terraform -chdir=${{ env.platform_directory }} apply -lock=false
+
       # Message to say this wf completed
       - name: Run a one-line script
         run: echo Completed the flow successfully
