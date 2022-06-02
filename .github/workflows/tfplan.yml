@@ -64,7 +64,7 @@ jobs:
         run: terraform -chdir=${{ env.working_directory }} init
 
       - name: Terraform Plan
-        run: terraform -chdir=${{ env. }} plan -lock=false
+        run: terraform -chdir=${{ env.working_directory }} plan -lock=false
 
       - name: Terraform Init
         run: terraform -chdir=${{ env.platform_directory }} init
