@@ -71,38 +71,38 @@ jobs:
       - name: Run a one-line script
         run: echo Completed the flow successfully
 
-  k8s:
-    needs: terraform-plan
-    runs-on: ubuntu-latest
-    env:
-      working_directory: "environments/nonprod/platform"
-      aksmodule_directory: "environments/nonprod/platform/modules/aks"
-      nwmodule_directory: "environments/nonprod/platform/modules/network"
-      k8smodule_directory: "environments/nonprod/platform/modules/k8s"
+  # k8s:
+  #   needs: terraform-plan
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     working_directory: "environments/nonprod/platform"
+  #     aksmodule_directory: "environments/nonprod/platform/modules/aks"
+  #     nwmodule_directory: "environments/nonprod/platform/modules/network"
+  #     k8smodule_directory: "environments/nonprod/platform/modules/k8s"
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  #   # Steps represent a sequence of tasks that will be executed as part of the job
     
-    defaults:
-      run:
-        shell: bash
+  #   defaults:
+  #     run:
+  #       shell: bash
     
-    steps:
+  #   steps:
 
-      - name: Checkout
-        uses: actions/checkout@v3
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          # client-id : ${{ secrets.ARM_CLIENT_ID }}
-          # ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          # tenant-id : ${{ secrets.ARM_TENANT_ID }}
-          # subscription-id': ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  #     - name: Azure Login
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
+  #         # client-id : ${{ secrets.ARM_CLIENT_ID }}
+  #         # ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  #         # tenant-id : ${{ secrets.ARM_TENANT_ID }}
+  #         # subscription-id': ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
-      - name: Terraform Init for k8s
-        run: terraform -chdir=${{ env.k8smodule_directory }} init
+  #     - name: Terraform Init for k8s
+  #       run: terraform -chdir=${{ env.k8smodule_directory }} init
 
-      - name: Terraform Apply for k8s
-        run: terraform -chdir=${{ env.k8smodule_directory }} apply -auto-approve 
+  #     - name: Terraform Apply for k8s
+  #       run: terraform -chdir=${{ env.k8smodule_directory }} apply -auto-approve 
 
