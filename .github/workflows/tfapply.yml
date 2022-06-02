@@ -72,7 +72,7 @@ jobs:
         run: terraform -chdir=${{ env.platform_directory }} init
 
       - name: Terraform Apply
-        run: terraform -chdir=${{ env.platform_directory }} apply -lock=false
+        run: terraform -chdir=${{ env.platform_directory }} apply -lock=false -auto-approve
 
       # Message to say this wf completed
       - name: Run a one-line script
