@@ -1,21 +1,24 @@
-data "azurerm_resource_group" "main" {
-  name = "rgaks"
-}
+# data "azurerm_resource_group" "main" {
+#   name = "rgaks"
+# }
+
+# data "terraform_remote_state" "security" {
+#   backend = "azurerm"
+#   config = {
+#     resource_group_name  = "rgaksstorage"
+#     storage_account_name = "storagetfstatesajin"
+#     container_name       = "nonprodtfstate"
+#     key                  = "security/terraform.tfstate"
+#   }
+# }
 
 resource "azurerm_container_registry" "example" {
   name                  = "sajinacr"
-  resource_group_name   = data.azurerm_resource_group.main.name
-  location              = data.azurerm_resource_group.main.location
+  resource_group_name   = azurerm_resource_group.example.name
+  location              = azurerm_resource_group.example.location
   sku                   = "Basic"
   admin_enabled = true
   # data_endpoint_enabled = true
-}
-resource "azurerm_key_vault_secret" "cr_admin_credentials" {
-  #checkov:skip=CKV_AZURE_41
-  #checkov:skip=CKV_AZURE_114
-  name         = "cr-admin-credentials"
-  value        = "${azurerm_container_registry.example.admin_username}:${azurerm_container_registry.example.admin_password}"
-  key_vault_id = data.terraform_remote_state.security.outputs.azurerm_key_vault_id
 }
 
 # resource "azurerm_container_registry_token" "example" {

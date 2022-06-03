@@ -8,7 +8,7 @@ terraform {
     resource_group_name  = "rgaksstorage"
     storage_account_name = "storagetfstatesajin"
     container_name       = "nonprodtfstate"
-    key                  = "foundation/terraform.tfstate"
+    key                  = "security/terraform.tfstate"
   }
     required_providers {
     azurerm = {
@@ -23,20 +23,10 @@ terraform {
       source  = "hashicorp/random"
       version = ">= 2.3.0"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.0"
-    }
-  }
-}
-
-data "terraform_remote_state" "foundation" {
-  backend = "azurerm"
-  config = {
-    resource_group_name  = "rgaksstorage"
-    storage_account_name = "storagetfstatesajin"
-    container_name       = "nonprodtfstate"
-    key                  = "foundation/terraform.tfstate"
+    # kubernetes = {
+    #   source  = "hashicorp/kubernetes"
+    #   version = ">= 2.0"
+    # }
   }
 }
 
@@ -49,13 +39,3 @@ data "terraform_remote_state" "security" {
     key                  = "security/terraform.tfstate"
   }
 }
-
-# data "terraform_remote_state" "storage" {
-#   backend = "azurerm"
-#   config = {
-#     resource_group_name  = "rgmyaks"
-#     storage_account_name = "stnonprodtfstatesajin"
-#     container_name       = "nonprodtfstate"
-#     key                  = "storage/terraform.tfstate"
-#   }
-# }
